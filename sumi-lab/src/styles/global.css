@@ -1,0 +1,78 @@
+/* 1. Design Tokens */
+:root {
+  --color-bg: #f9f8f6;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f2efea;
+  --color-text: #2c2d28;
+  --color-muted: #6f716a;
+  --color-border: #e3ded6;
+  --color-sage: #7a8b76;
+  --color-sage-soft: #e6ebe3;
+  --color-clay: #c08570;
+  --color-clay-soft: #f2e3dc;
+  --color-cream: #f7f1e8;
+  --color-dream: #eceaf3;
+  --shadow-soft: 0 18px 45px rgba(44, 45, 40, 0.08);
+  --font-heading: Georgia, "Times New Roman", serif;
+  --font-body: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* 2. Base */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); line-height: 1.8; }
+h1,h2,h3 { margin: 0 0 .75rem; font-family: var(--font-heading); line-height: 1.2; }
+a { color: inherit; text-decoration: none; }
+p { margin: 0 0 1rem; }
+
+/* 3. Layout */
+.container { max-width: 1120px; margin: 0 auto; padding: 0 1.2rem; }
+.page-content { padding: 0 0 4rem; }
+.page-content > :not(.hero-full) { max-width: 1120px; margin-inline: auto; padding-inline: 1.2rem; }
+.home-flow { margin-top: 2.2rem; display: grid; gap: 2rem; }
+.grid { display: grid; gap: 1rem; }
+.cards-grid { grid-template-columns: 1fr; }
+
+/* 4. Header */
+.site-header { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--color-bg) 92%, #fff); border-bottom: 1px solid var(--color-border); backdrop-filter: blur(8px); }
+.site-header--overlay { position: absolute; width: 100%; border-bottom: 0; background: linear-gradient(180deg, rgba(32,35,35,.45), rgba(32,35,35,.12)); color: #f5f4f1; backdrop-filter: none; }
+.header-inner { display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 0; gap: 1rem; }
+.brand { font-family: var(--font-heading); font-size: 1.35rem; letter-spacing: .03em; }
+.nav-list { display: flex; list-style: none; gap: 1.25rem; margin: 0; padding: 0; font-size: .92rem; }
+
+/* 5. Hero */
+.hero-full { position: relative; min-height: 78vh; display: grid; align-items: end; color: #f7f6f4; background:
+radial-gradient(circle at 18% 10%, rgba(173,164,142,.24), transparent 44%),
+linear-gradient(160deg, #455b5e 0%, #264047 45%, #1a2b30 100%); }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.45)); }
+.hero-content { position: relative; z-index: 2; padding-bottom: 5rem; max-width: 760px; }
+.eyebrow { color: #d8dfd6; font-size: .95rem; letter-spacing: .05em; text-transform: uppercase; }
+.hero h1 { font-size: clamp(2.4rem, 8vw, 5.4rem); margin-bottom: 1rem; }
+.hero-lead { font-size: 1.1rem; color: #ebe9e4; max-width: 65ch; }
+.hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.4rem; }
+.manifesto-strip { padding: 1rem 1.25rem; background: var(--color-cream); border-left: 4px solid var(--color-clay); border-radius: 14px; }
+
+/* 6. Cards */
+.card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 18px; padding: 1.3rem; box-shadow: var(--shadow-soft); }
+.category-card { background: var(--color-surface-soft); }
+.meta { color: var(--color-muted); font-size: .88rem; }
+.dream-card { background: var(--color-dream); }
+.section-header { margin: 0 0 1rem; }
+.badge { display: inline-block; padding: .2rem .6rem; border-radius: 999px; font-size: .8rem; background: var(--color-clay-soft); color: #7c4c3f; }
+
+/* 7. Article Pages */
+.article-page { max-width: 700px; margin: 2rem auto 0; padding: 2rem; }
+.back-link { display: inline-block; margin-bottom: 1rem; color: var(--color-sage); }
+
+/* 8. Dream Pages */
+.dream-single { background: linear-gradient(180deg, var(--color-surface), var(--color-dream)); }
+
+/* 9. Buttons and Tags */
+.btn { display: inline-block; padding: .7rem 1.1rem; border-radius: 999px; background: var(--color-sage); color: #fff; font-weight: 600; }
+.btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,.6); color: #fff; }
+.tag-group { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .75rem; align-items: center; }
+.tag-label { color: var(--color-muted); font-size: .85rem; }
+.tag { padding: .2rem .55rem; border-radius: 999px; font-size: .8rem; background: var(--color-surface-soft); }
+.site-footer { border-top: 1px solid var(--color-border); margin-top: 3rem; padding: 1.25rem 0; color: var(--color-muted); font-size: .9rem; }
+
+/* 10. Responsive */
+@media (min-width: 760px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }

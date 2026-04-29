@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../components/BaseLayout.astro';
+import TagList from '../../components/TagList.astro';
+import BookCandidateBadge from '../../components/BookCandidateBadge.astro';
+import { getLaboratuvarCategoryLabel } from '../../lib/categories';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('laboratuvar');
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+interface Props {
+  post: CollectionEntry<'laboratuvar'>;
+}
+
+const { post } = Astro.props as Props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={`${post.data.title} · Sumi Lab`}>
+  <article class="article-page card">
+    <a href="/laboratuvar" class="back-link">← Laboratuvar'a dön</a>
+    <p class="meta">
+      {post.data.date.toLocaleDateString('tr-TR')} · {getLaboratuvarCategoryLabel(post.data.category)}
+    </p>
+    <h1>{post.data.title}</h1>
+    <p>{post.data.description}</p>
+    <TagList items={post.data.tags} />
+    {post.data.book_candidate && <BookCandidateBadge />}
+    <Content />
+  </article>
+</BaseLayout>
