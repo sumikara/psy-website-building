@@ -7,12 +7,14 @@ interface Props {
   title?: string;
   description?: string;
   canonical?: string;
+  transparentHeader?: boolean;
 }
 
 const {
   title = 'Sumi Lab',
   description = 'Kendi sinir sistemimin laboratuvarından notlar.',
-  canonical
+  canonical,
+  transparentHeader = false
 } = Astro.props;
 ---
 
@@ -28,8 +30,8 @@ const {
     <meta property="og:type" content="website" />
   </head>
   <body>
-    <Header />
-    <main class="container page-content">
+    <Header transparent={transparentHeader} />
+    <main class="page-content">
       <slot />
     </main>
     <Footer />

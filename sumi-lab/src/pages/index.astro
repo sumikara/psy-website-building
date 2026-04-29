@@ -7,32 +7,46 @@ import CategoryCard from '../components/CategoryCard.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import DreamCard from '../components/DreamCard.astro';
 
-const laboratuvar = (await getCollection('laboratuvar')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf()).slice(0,4);
-const ruyalar = (await getCollection('ruyalar')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf()).slice(0,3);
+const laboratuvar = (await getCollection('laboratuvar'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 4);
+const ruyalar = (await getCollection('ruyalar'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 ---
-<BaseLayout>
+
+<BaseLayout transparentHeader={true}>
   <Hero />
-  <section class="manifesto-strip">Bilirsem değiştirebilirim. Ama bedenim sadece anlamla değil, deneyimle iyileşir.</section>
-  <section>
-    <SectionHeader title="Ana Sütunlar" />
-    <div class="grid cards-grid">
-      <CategoryCard title="Beden & Sinir Sistemi" description="Regülasyon, brain fog, amigdala, beden farkındalığı ve uyanma notları." />
-      <CategoryCard title="Sınırlar & İletişim" description="Fawning, fazla açıklama, insanları kırmama çabası ve sınır çizme pratikleri." />
-      <CategoryCard title="Bağlanma Laboratuvarı" description="Belirsizlik, ruminasyon, dopamin döngüleri, yakınlık ve kaçma halleri." />
-      <CategoryCard title="Kökler & Gölgeler" description="Aile, çocukluk, öfke, yas, korunmasızlık ve kahramanların düşüşü." />
-      <CategoryCard title="Edebiyat & Felsefe" description="Yalom, Beckett, eşlik arayışı, yabancılaşma ve anlam notları." />
-    </div>
-  </section>
-  <section>
-    <SectionHeader title="Son Deneyler" />
-    <div class="grid cards-grid">{laboratuvar.map((post)=><ArticleCard post={post} />)}</div>
-  </section>
-  <section>
-    <SectionHeader title="Gece Vardiyası" subtitle="Rüyalar bazen zihnin değil, bedenin tuttuğu kayıtlar gibi konuşur." />
-    <div class="grid cards-grid">{ruyalar.map((post)=><DreamCard post={post} />)}</div>
-  </section>
-  <section class="card about-preview">
-    <p>Ben psikolog değilim. Burada kendimi düzeltmeye değil, kendimi görmeye alan açıyorum.</p>
-    <a class="btn" href="/hakkimda">Hakkımda</a>
-  </section>
+
+  <div class="container home-flow">
+    <section class="manifesto-strip">
+      Bilirsem değiştirebilirim. Ama bedenim sadece anlamla değil, deneyimle iyileşir.
+    </section>
+
+    <section>
+      <SectionHeader title="Ana Sütunlar" />
+      <div class="grid cards-grid">
+        <CategoryCard title="Beden & Sinir Sistemi" description="Regülasyon, brain fog, amigdala, beden farkındalığı ve uyanma notları." />
+        <CategoryCard title="Sınırlar & İletişim" description="Fawning, fazla açıklama, insanları kırmama çabası ve sınır çizme pratikleri." />
+        <CategoryCard title="Bağlanma Laboratuvarı" description="Belirsizlik, ruminasyon, dopamin döngüleri, yakınlık ve kaçma halleri." />
+        <CategoryCard title="Kökler & Gölgeler" description="Aile, çocukluk, öfke, yas, korunmasızlık ve kahramanların düşüşü." />
+        <CategoryCard title="Edebiyat & Felsefe" description="Yalom, Beckett, eşlik arayışı, yabancılaşma ve anlam notları." />
+      </div>
+    </section>
+
+    <section>
+      <SectionHeader title="Son Deneyler" />
+      <div class="grid cards-grid">{laboratuvar.map((post) => <ArticleCard post={post} />)}</div>
+    </section>
+
+    <section>
+      <SectionHeader title="Gece Vardiyası" subtitle="Rüyalar bazen zihnin değil, bedenin tuttuğu kayıtlar gibi konuşur." />
+      <div class="grid cards-grid">{ruyalar.map((post) => <DreamCard post={post} />)}</div>
+    </section>
+
+    <section class="card about-preview">
+      <p>Ben psikolog değilim. Burada kendimi düzeltmeye değil, kendimi görmeye alan açıyorum.</p>
+      <a class="btn" href="/hakkimda">Hakkımda</a>
+    </section>
+  </div>
 </BaseLayout>

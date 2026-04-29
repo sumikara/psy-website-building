@@ -1,4 +1,12 @@
-<header class="site-header">
+---
+interface Props {
+  transparent?: boolean;
+}
+
+const { transparent = false } = Astro.props;
+---
+
+<header class:list={["site-header", transparent && "site-header--overlay"]}>
   <div class="container header-inner">
     <a href="/" class="brand">Sumi Lab</a>
     <nav>
