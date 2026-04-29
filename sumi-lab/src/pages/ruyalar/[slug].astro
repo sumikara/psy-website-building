@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../components/BaseLayout.astro';
+import TagList from '../../components/TagList.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('ruyalar');
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+interface Props {
+  post: CollectionEntry<'ruyalar'>;
+}
+
+const { post } = Astro.props as Props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={`${post.data.title} · Sumi Lab`}>
+  <article class="article-page card dream-single">
+    <a href="/ruyalar" class="back-link">← Gece Vardiyası'na dön</a>
+    <p class="meta">{post.data.date.toLocaleDateString('tr-TR')}</p>
+    <h1>{post.data.title}</h1>
+    <p>{post.data.description}</p>
+    <TagList items={post.data.symbols} label="Semboller" />
+    <TagList items={post.data.themes} label="Temalar" />
+    <Content />
+  </article>
+</BaseLayout>

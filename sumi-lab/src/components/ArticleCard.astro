@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import TagList from './TagList.astro';
+import BookCandidateBadge from './BookCandidateBadge.astro';
+import { getLaboratuvarCategoryLabel } from '../lib/categories';
+
+interface Props {
+  post: CollectionEntry<'laboratuvar'>;
+}
+
+const { post } = Astro.props;
+---
+
+<article class="card">
+  <p class="meta">
+    {post.data.date.toLocaleDateString('tr-TR')} · {getLaboratuvarCategoryLabel(post.data.category)}
+  </p>
+  <h3><a href={`/laboratuvar/${post.slug}`}>{post.data.title}</a></h3>
+  <p>{post.data.description}</p>
+  <TagList items={post.data.tags} />
+  {post.data.book_candidate && <BookCandidateBadge />}
+</article>
