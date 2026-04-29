@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/BaseLayout.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const posts = (await getCollection('laboratuvar')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
+---
+<BaseLayout title="Laboratuvar · Sumi Lab">
+  <SectionHeader title="Laboratuvar" subtitle="Laboratuvar, kendimi gözlemlediğim ve not aldığım yer. Bazen bir sinir sistemi notu, bazen bir ilişki döngüsü, bazen de bir cümlenin bedende bıraktığı iz." />
+  <div class="grid cards-grid">{posts.map((post)=><ArticleCard post={post} />)}</div>
+</BaseLayout>

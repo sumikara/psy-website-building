@@ -1,0 +1,10 @@
+---
+interface Props { items: string[]; label?: string }
+const { items, label } = Astro.props;
+---
+{items.length > 0 && (
+  <div class="tag-group">
+    {label && <span class="tag-label">{label}</span>}
+    {items.map((item) => <span class="tag">{item}</span>)}
+  </div>
+)}
