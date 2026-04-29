@@ -1,9 +1,15 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import TagList from './TagList.astro';
 import BookCandidateBadge from './BookCandidateBadge.astro';
-interface Props { post: any }
+
+interface Props {
+  post: CollectionEntry<'ruyalar'>;
+}
+
 const { post } = Astro.props;
 ---
+
 <article class="card dream-card">
   <p class="meta">{post.data.date.toLocaleDateString('tr-TR')}</p>
   <h3><a href={`/ruyalar/${post.slug}`}>{post.data.title}</a></h3>

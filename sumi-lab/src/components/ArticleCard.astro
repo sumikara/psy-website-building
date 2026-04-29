@@ -1,18 +1,20 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import TagList from './TagList.astro';
 import BookCandidateBadge from './BookCandidateBadge.astro';
-interface Props { post: any }
+import { getLaboratuvarCategoryLabel } from '../lib/categories';
+
+interface Props {
+  post: CollectionEntry<'laboratuvar'>;
+}
+
 const { post } = Astro.props;
-const categoryMap: Record<string, string> = {
-  beden_sinir_sistemi: 'Beden & Sinir Sistemi',
-  sinirlar_iletisim: 'Sınırlar & İletişim',
-  baglanma_laboratuvari: 'Bağlanma Laboratuvarı',
-  kokler_golgeler: 'Kökler & Gölgeler',
-  edebiyat_felsefe: 'Edebiyat & Felsefe'
-};
 ---
+
 <article class="card">
-  <p class="meta">{post.data.date.toLocaleDateString('tr-TR')} · {categoryMap[post.data.category]}</p>
+  <p class="meta">
+    {post.data.date.toLocaleDateString('tr-TR')} · {getLaboratuvarCategoryLabel(post.data.category)}
+  </p>
   <h3><a href={`/laboratuvar/${post.slug}`}>{post.data.title}</a></h3>
   <p>{post.data.description}</p>
   <TagList items={post.data.tags} />
